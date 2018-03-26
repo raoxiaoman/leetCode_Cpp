@@ -3,14 +3,12 @@ using namespace std;
 class Solution {
     public:
         int reverse(int x) {
-            int ret = 0;
-            int y = abs(x);
-            while(y > 0){
-                ret=(y%10)+ret*10;
-                y = y/10;
+            long long ret = 0;
+            while(x){
+                ret = x%10+ret*10;
+                x = x/10;
             }
-
-            return x>0?ret:-ret;
+            return (ret < INT32_MIN || ret > INT32_MAX)?0:ret;
         }
 };
 int main(int argc, char *argv[])
