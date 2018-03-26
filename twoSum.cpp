@@ -1,4 +1,5 @@
 #include <vector>
+#include <map>
 #include <algorithm>
 #include <iostream>
 using namespace std;
@@ -63,10 +64,49 @@ class Solution{
 
 };
 
+class Solution_map{
+    public:
+        vector<int> twoSum(vector<int>& num,int target){
+            vector<int> ret;
+            map<int,int> maps;
+            for (size_t i = 0; i < num.size(); ++i) {
+                maps.insert({num[i],i});
+            }
+
+            for (size_t i = 0; i < num.size(); ++i) {
+                int temp = target - num[i];
+                if(maps.find(temp)!=maps.end() && maps[temp]!=(int)i){
+                    ret.push_back(i);
+                    ret.push_back(maps[temp]);
+                }
+            }
+            return ret;
+        }
+
+};
+
+class Solution_map_o{
+    public:
+        vector<int> twoSum(vector<int>& num,int target){
+            vector<int> ret;
+            map<int,int> maps;
+            for (size_t i = 0; i < num.size(); ++i) {
+                int temp = target - num[i];
+                if(maps.find(temp)!=maps.end()){
+                    ret.push_back(maps[temp]);
+                    ret.push_back(i);
+                }
+                maps.insert({num[i],i});
+            }
+
+            return ret;
+        }
+};
+
 int main(int argc, char *argv[])
 {
     vector<int> nums ={5,2,3,4};
-    Solution s;
+    Solution_map s;
     vector<int> ret = s.twoSum(nums, 9);
     for (auto i : ret) {
         cout << i << endl;
