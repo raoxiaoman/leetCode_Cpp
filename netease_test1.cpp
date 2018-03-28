@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 
 using namespace std;
 int main(){
@@ -6,20 +7,26 @@ int main(){
     int n = 0;
     int nums = 0;
     cin >> times;
-    char need[1000];
-    while(times > 0){
+    string need;
+    for(int i=0;i<times;i++){
         cin >> n;
         cin >> need;
         if(n <=3 ) {
-            cout << 1 << endl;
+            if(need.find(".")!=string::npos){
+                cout << 1 << endl;
+            }else{
+                cout << 0 << endl;
+            }
             continue;
         }
         for (int i = 0; i < n; ++i) {
             if(need[i] == '.'){
                 nums++;
+                i=i+2;
             }
         }
-        cout << nums / 3 +1 << endl;
+
+        cout << nums  << endl;
         nums = 0;
     }
     return 0;
