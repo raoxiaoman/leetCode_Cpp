@@ -32,26 +32,24 @@ int main(int argc, char *argv[])
     for (int kk = 0; kk < peoplenum; ++kk) {
         cin >> temp;
         peoples.push_back(temp);
+        auto iter = maps.find(temp);
+        if(iter == maps.end()){
+            maps.insert({temp,0});
+        }
     }
 
+    auto pre = maps.begin();
+    auto cur = maps.begin();
+    cur++;
+
+    for(;cur!=maps.end();cur++,pre++){
+        if(cur->second < pre->second){
+            cur->second = pre->second;
+        }
+    }
+    
     for (auto people : peoples) {
-        size_t max = 0;
-        auto iter2 = maps.begin();
-        for(;iter2 != maps.end();iter2++){
-            if(iter2->first <= people){
-                temp = iter2->second;
-                //cout << "temp:" << temp << endl;
-                if(max < temp){
-                    max = temp;
-                } 
-            }else{
-                cout << max << endl;
-                break;
-            }
-        }
-        if(iter2 == maps.end()){
-            cout  << max << endl;
-        }
+        cout << maps[people] << endl;
     }
     return 0;
 }
