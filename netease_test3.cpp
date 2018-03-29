@@ -1,55 +1,34 @@
 #include <iostream>
-#include <map> 
-#include <set> 
-#include <vector> 
-using  namespace std; 
-int main(int argc, char *argv[])
-{
-    int workNum = 0;
-    int peoplenum = 0;
-    cin >> workNum ;
-    cin >> peoplenum;
+#include <string>
 
-    map<size_t,size_t> maps;
-    vector<size_t> peoples;
-    size_t  pay = 0;
-    size_t diff = 0;
-
-    for (int i = 0; i < workNum; ++i) {
-        cin >> diff;
-        cin >> pay;
-        auto iter = maps.find(diff);
-        if(iter == maps.end()){
-            maps.insert({diff,pay});
-        }else{
-            if(pay > iter->second){
-                iter->second = pay;
+using namespace std;
+int main(){
+    int times = 0;
+    int n = 0;
+    int nums = 0;
+    cin >> times;
+    string need;
+    for(int i=0;i<times;i++){
+        cin >> n;
+        cin >> need;
+        if(n <=3 ) {
+            if(need.find(".")!=string::npos){
+                cout << 1 << endl;
+            }else{
+                cout << 0 << endl;
+            }
+            continue;
+        }
+        for (int i = 0; i < n; ++i) {
+            if(need[i] == '.'){
+                nums++;
+                i=i+2;
             }
         }
-    }
 
-    size_t  temp;
-    for (int kk = 0; kk < peoplenum; ++kk) {
-        cin >> temp;
-        peoples.push_back(temp);
-        auto iter = maps.find(temp);
-        if(iter == maps.end()){
-            maps.insert({temp,0});
-        }
-    }
-
-    auto pre = maps.begin();
-    auto cur = maps.begin();
-    cur++;
-
-    for(;cur!=maps.end();cur++,pre++){
-        if(cur->second < pre->second){
-            cur->second = pre->second;
-        }
-    }
-    
-    for (auto people : peoples) {
-        cout << maps[people] << endl;
+        cout << nums  << endl;
+        nums = 0;
     }
     return 0;
+
 }
